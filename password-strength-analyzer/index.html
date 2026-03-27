@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Analyzer</title>
+    <!-- Use Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Password Strength Analyzer</h1>
+        
+        <!-- Password Input Field & Toggle Button -->
+        <div class="input-wrapper">
+            <input type="password" id="password" placeholder="Enter your password" autocomplete="off">
+            <button id="togglePassword">[ Show Password ]</button>
+        </div>
+        
+        <!-- Visual Strength Meter -->
+        <div class="meter-container">
+            <div id="meter" class="meter"></div>
+        </div>
+        
+        <!-- Strength Score and Crack Time -->
+        <div class="status">
+            <p>Strength: <span id="scoreText">Enter a password</span></p>
+            <p>Estimated Crack Time: <span id="crackTime">-</span></p>
+        </div>
+        
+        <!-- Security Suggestions (Hidden by default) -->
+        <div class="suggestions-container" id="suggestionsContainer" style="display: none;">
+            <h3>Security Suggestions</h3>
+            <ul id="suggestionsList"></ul>
+        </div>
+        
+        <!-- Password Tips Section -->
+        <div class="tips-container">
+            <h3>Password Tips</h3>
+            <ul>
+                <li>✔ Use at least 12 characters</li>
+                <li>✔ Include uppercase and lowercase letters</li>
+                <li>✔ Add numbers and special characters</li>
+                <li>✔ Avoid common words</li>
+            </ul>
+        </div>
+
+        <!-- Optional Advanced Feature: Generate Strong Password -->
+        <button id="generatePassword" class="generate-btn">Generate Strong Password</button>
+        <div id="generatedPassword" class="generated-output" style="display: none;"></div>
+    </div>
+
+    <!-- Include zxcvbn password strength library via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
