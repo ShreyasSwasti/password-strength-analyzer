@@ -13,5 +13,3 @@ Today I learned:
 - Pushing changes
 
 
-
-dfguhsiokdpf[g;hjgkhlguyit6k6ji45ureyfhdvc nmbxf
