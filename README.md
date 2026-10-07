@@ -1,185 +1,112 @@
 # 🔐 Password Strength Analyzer
 
-A simple Java-based tool that analyzes the strength of a password and provides useful feedback to help users create stronger and more secure passwords.
+A simple and user-friendly **Password Strength Analyzer** built with HTML, CSS, and JavaScript.
+
+The application analyzes a password in real time and provides a **strength score, estimated crack time, and security recommendations** using the `zxcvbn` password-strength estimation library.
+
+---
+
+## 🌐 Live Demo
+
+**Live Website:**  
+https://shreyasswasti.github.io/password-strength-analyzer/
+
+---
+
+## 📌 Project Overview
+
+Weak and commonly used passwords are one of the major causes of account compromise.
+
+The Password Strength Analyzer helps users understand how secure their passwords are before using them. It evaluates passwords using the **zxcvbn** library, which considers common passwords, patterns, repeated characters, sequences, and other password characteristics.
+
+The tool provides immediate feedback without sending the password to a server.
+
+---
 
 ## ✨ Features
 
-* 🔎 Analyzes password strength
-* 🔢 Checks for numbers
-* 🔠 Checks for uppercase and lowercase letters
-* 🔣 Checks for special characters
-* 📏 Checks password length
-* ⚠️ Identifies weak password patterns
-* 💡 Provides suggestions for improving password strength
-* 📊 Gives an overall strength rating
+- 🔐 Real-time password analysis
+- 📊 Password strength score
+- 📈 Visual strength indicator
+- ⏱️ Estimated password cracking time
+- 💡 Security suggestions
+- 👁️ Show/Hide password option
+- 📱 Responsive user interface
+- ⚡ Instant analysis while typing
+- 🔒 Client-side password analysis
+- 🛡️ Uses the `zxcvbn` password-strength estimation library
 
-## 🛠️ Built With
+---
 
-* **Java**
-* Object-Oriented Programming (OOP)
-* String manipulation
-* Conditional statements
-* Regular expressions
+## 📊 Password Strength Levels
 
-## 📋 How It Works
+The analyzer uses the `zxcvbn` scoring system:
 
-The analyzer evaluates a password based on several characteristics:
+| Score | Strength |
+|------:|----------|
+| 0 | Very Weak |
+| 1 | Weak |
+| 2 | Fair |
+| 3 | Strong |
+| 4 | Very Strong |
 
-| Check              | Description                                      |
-| ------------------ | ------------------------------------------------ |
-| Length             | Checks whether the password is sufficiently long |
-| Uppercase          | Checks for uppercase letters (`A-Z`)             |
-| Lowercase          | Checks for lowercase letters (`a-z`)             |
-| Numbers            | Checks for digits (`0-9`)                        |
-| Special Characters | Checks for symbols such as `!`, `@`, `#`, `$`    |
-| Common Patterns    | Checks for easily guessable patterns             |
+The score is calculated based on how difficult the password is to guess rather than simply checking whether it contains uppercase letters, numbers, or symbols.
 
-The password is then assigned an overall strength level.
+---
 
-### Example
+## ⏱️ Crack Time Estimation
 
-```text
-Enter your password: Hello123
+The application displays an estimated time required to crack the password based on the analysis performed by `zxcvbn`.
 
-Password Strength: Medium
+Examples include:
 
-Suggestions:
-- Add a special character
+- Seconds
+- Minutes
+- Hours
+- Days
+- Months
+- Years
+- Centuries
+
+The displayed value is an **estimate**, not a guarantee of how long an actual attack would take.
+
+---
+
+## 💡 Security Recommendations
+
+The analyzer provides suggestions when a password can be improved.
+
+Examples:
+
 - Use a longer password
-```
+- Avoid commonly used passwords
+- Avoid repeated characters
+- Avoid predictable sequences
+- Use a unique password
+- Consider using a passphrase
 
-A stronger password might look like:
+---
 
-```text
-Mango!River92$Cloud
-```
+## 🛠️ Technologies Used
 
-## 🚀 Getting Started
+### Frontend
 
-### Prerequisites
+- HTML5
+- CSS3
+- JavaScript
 
-Make sure you have Java installed on your system.
+### Security Library
 
-Check your Java version:
+- [zxcvbn](https://github.com/dropbox/zxcvbn)
 
-```bash
-java -version
-```
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/ShreyasSwasti/password-strength-analyzer.git
-```
-
-Navigate to the project:
-
-```bash
-cd password-strength-analyzer
-```
-
-### Run the Program
-
-Compile the Java source file:
-
-```bash
-javac PasswordStrengthAnalyzer.java
-```
-
-Then run it:
-
-```bash
-java PasswordStrengthAnalyzer
-```
-
-> **Note:** If the main Java file has a different name, replace `PasswordStrengthAnalyzer.java` with the correct filename.
+---
 
 ## 📁 Project Structure
 
 ```text
 password-strength-analyzer/
 │
-├── src/
-│   └── PasswordStrengthAnalyzer.java
-│
-├── README.md
-└── LICENSE
-```
-
-The exact structure may vary depending on the current implementation.
-
-## 📊 Strength Levels
-
-The analyzer can classify passwords into levels such as:
-
-* 🔴 **Weak** — Too short or easy to guess
-* 🟠 **Moderate** — Contains some security characteristics
-* 🟡 **Good** — Meets most requirements
-* 🟢 **Strong** — Long and contains a good combination of character types
-
-## 🔒 Security Note
-
-This project is intended for **educational purposes** and basic password-strength analysis.
-
-It should not be treated as a complete password-security solution. A real-world password security system should also consider factors such as:
-
-* Password breach databases
-* Password reuse
-* Dictionary attacks
-* Credential stuffing
-* Secure password hashing
-* Rate limiting
-* Multi-factor authentication
-
-**Never store or log users' actual passwords.**
-
-## 🤝 Contributing
-
-Contributions are welcome!
-
-If you'd like to improve this project:
-
-1. Fork the repository.
-2. Create a new branch.
-
-```bash
-git checkout -b feature/improve-analyzer
-```
-
-3. Make your changes.
-4. Commit your changes.
-
-```bash
-git commit -m "Improve password strength analysis"
-```
-
-5. Push your branch.
-
-```bash
-git push origin feature/improve-analyzer
-```
-
-6. Open a Pull Request.
-
-## 💡 Future Improvements
-
-Some ideas for future versions:
-
-* [ ] Add a graphical user interface
-* [ ] Add password entropy calculation
-* [ ] Detect common passwords
-* [ ] Check passwords against known breach databases
-* [ ] Add unit tests
-* [ ] Improve password scoring
-* [ ] Add configurable strength rules
-* [ ] Add support for passphrase analysis
-
-## 📄 License
-
-This project is open source. See the `LICENSE` file for more information.
-
-## 👨‍💻 Author
-
-**Shreyas Swasti**
-
-GitHub: [@ShreyasSwasti](https://github.com/ShreyasSwasti)
+├── index.html
+├── style.css
+├── script.js
+└── README.md
