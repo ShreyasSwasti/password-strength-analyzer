@@ -9,6 +9,42 @@ const suggestionsList = document.getElementById('suggestionsList');
 const generatePasswordBtn = document.getElementById('generatePassword');
 const generatedPasswordDisplay = document.getElementById('generatedPassword');
 
+// Password security checklist elements
+const passwordChecks = [
+    {
+        id: 'checkLength',
+        test: password => password.length >= 8
+    },
+    {
+        id: 'checkUppercase',
+        test: password => /[A-Z]/.test(password)
+    },
+    {
+        id: 'checkLowercase',
+        test: password => /[a-z]/.test(password)
+    },
+    {
+        id: 'checkNumber',
+        test: password => /[0-9]/.test(password)
+    },
+    {
+        id: 'checkSpecial',
+        test: password => /[^A-Za-z0-9]/.test(password)
+    }
+];
+
+function updatePasswordChecklist(password) {
+    passwordChecks.forEach(check => {
+        const element = document.getElementById(check.id);
+        const passed = check.test(password);
+
+        element.classList.toggle('passed', passed);
+        element.textContent =
+            `${passed ? '✓' : '✗'} ${element.textContent.substring(2).trim()}`;
+    });
+}
+
+
 /**
  * Array to map zxcvbn score (0-4) to user-friendly text descriptions
  */
@@ -26,6 +62,7 @@ const strengthLabels = [
  */
 passwordInput.addEventListener('input', () => {
     const password = passwordInput.value;
+    updatePasswordChecklist(password);
 
     // Handle empty password scenario
     if (password === "") {

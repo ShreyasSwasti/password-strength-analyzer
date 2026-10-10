@@ -4,54 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Strength Analyzer</title>
-    <!-- Use Google Fonts for better typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Password Strength Analyzer</h1>
-        
-        <!-- Password Input Field & Toggle Button -->
+
         <div class="input-wrapper">
-            <input type="password" id="password" placeholder="Enter your password" autocomplete="off">
-            <button id="togglePassword">[ Show Password ]</button>
+            <input type="password" id="password" placeholder="Enter your password" autocomplete="off" aria-label="Enter your password">
+            <button id="togglePassword" type="button">[ Show Password ]</button>
         </div>
-        
-        <!-- Visual Strength Meter -->
+
+        <!-- Live password security checklist -->
+        <div class="checklist-container" aria-live="polite">
+            <h3>Password Security Checklist</h3>
+            <ul class="checklist">
+                <li id="checkLength" class="requirement">✗ At least 8 characters</li>
+                <li id="checkUppercase" class="requirement">✗ An uppercase letter (A-Z)</li>
+                <li id="checkLowercase" class="requirement">✗ A lowercase letter (a-z)</li>
+                <li id="checkNumber" class="requirement">✗ A number (0-9)</li>
+                <li id="checkSpecial" class="requirement">✗ A special character (!@#$...)</li>
+            </ul>
+        </div>
+
         <div class="meter-container">
             <div id="meter" class="meter"></div>
         </div>
-        
-        <!-- Strength Score and Crack Time -->
+
         <div class="status">
             <p>Strength: <span id="scoreText">Enter a password</span></p>
             <p>Estimated Crack Time: <span id="crackTime">-</span></p>
         </div>
-        
-        <!-- Security Suggestions (Hidden by default) -->
+
         <div class="suggestions-container" id="suggestionsContainer" style="display: none;">
             <h3>Security Suggestions</h3>
             <ul id="suggestionsList"></ul>
         </div>
-        
-        <!-- Password Tips Section -->
+
         <div class="tips-container">
             <h3>Password Tips</h3>
             <ul>
-                <li>✔ Use at least 12 characters</li>
+                <li>✔ Prefer at least 12 characters</li>
                 <li>✔ Include uppercase and lowercase letters</li>
-                <li>✔ Add numbers and special characters</li>
-                <li>✔ Avoid common words</li>
+                <li>✔ Consider numbers and special characters</li>
+                <li>✔ Avoid common words and reused passwords</li>
             </ul>
         </div>
 
-        <!-- Optional Advanced Feature: Generate Strong Password -->
-        <button id="generatePassword" class="generate-btn">Generate Strong Password</button>
+        <button id="generatePassword" class="generate-btn" type="button">Generate Strong Password</button>
         <div id="generatedPassword" class="generated-output" style="display: none;"></div>
     </div>
 
-    <!-- Include zxcvbn password strength library via CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
     <script src="script.js"></script>
 </body>
