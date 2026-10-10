@@ -40,7 +40,7 @@ function updatePasswordChecklist(password) {
 
         element.classList.toggle('passed', passed);
         element.textContent =
-            `${passed ? '✓' : '✗'} ${element.textContent.substring(2).trim()}`;
+            `${passed ? 'âœ“' : 'âœ—'} ${element.textContent.substring(2).trim()}`;
     });
 }
 
@@ -135,38 +135,67 @@ togglePasswordBtn.addEventListener('click', () => {
  * Optional Advanced Feature: Generate Strong Password
  * Creates a secure, random 16-character password using various character sets
  */
+
 generatePasswordBtn.addEventListener('click', () => {
     const charsLowerCase = "abcdefghijklmnopqrstuvwxyz";
     const charsUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const charsNumbers = "0123456789";
     const charsSymbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
-    
-    const allChars = charsLowerCase + charsUpperCase + charsNumbers + charsSymbols;
-    let generatedPassword = "";
-    
-    // Make sure we have at least one character of each type
-    generatedPassword += charsLowerCase[Math.floor(Math.random() * charsLowerCase.length)];
-    generatedPassword += charsUpperCase[Math.floor(Math.random() * charsUpperCase.length)];
-    generatedPassword += charsNumbers[Math.floor(Math.random() * charsNumbers.length)];
-    generatedPassword += charsSymbols[Math.floor(Math.random() * charsSymbols.length)];
-    
-    // Fill the rest to reach 16 characters length
+
+    const characterSets = [
+        charsLowerCase,
+        charsUpperCase,
+        charsNumbers,
+        charsSymbols
+    ];
+
+    const allChars = characterSets.join("");
     const passwordLength = 16;
-    for (let i = generatedPassword.length; i < passwordLength; i++) {
-        const randomIndex = Math.floor(Math.random() * allChars.length);
-        generatedPassword += allChars[randomIndex];
+    const passwordCharacters = [];
+
+    // Generate a cryptographically secure random integer
+    function secureRandomIndex(max) {
+        const range = 0x100000000;
+        const limit = range - (range % max);
+        const randomValue = new Uint32Array(1);
+
+        do {
+            crypto.getRandomValues(randomValue);
+        } while (randomValue[0] >= limit);
+
+        return randomValue[0] % max;
     }
-    
-    // Shuffle the generated password characters for true randomness
-    generatedPassword = generatedPassword.split('').sort(() => 0.5 - Math.random()).join('');
-    
+
+    // Include at least one character from each character set
+    characterSets.forEach(characterSet => {
+        passwordCharacters.push(
+            characterSet[secureRandomIndex(characterSet.length)]
+        );
+    });
+
+    // Fill the remaining positions
+    while (passwordCharacters.length < passwordLength) {
+        passwordCharacters.push(
+            allChars[secureRandomIndex(allChars.length)]
+        );
+    }
+
+    // Securely shuffle the characters
+    for (let i = passwordCharacters.length - 1; i > 0; i--) {
+        const j = secureRandomIndex(i + 1);
+        [passwordCharacters[i], passwordCharacters[j]] =
+            [passwordCharacters[j], passwordCharacters[i]];
+    }
+
+    const generatedPassword = passwordCharacters.join("");
+
     // Display the generated password
     generatedPasswordDisplay.style.display = 'block';
     generatedPasswordDisplay.textContent = generatedPassword;
-    
-    // Also place it inside the input field and trigger analysis
+
+    // Update the password field and run the existing analysis
     passwordInput.value = generatedPassword;
     passwordInput.type = 'text';
     togglePasswordBtn.textContent = '[ Hide Password ]';
-    passwordInput.dispatchEvent(new Event('input')); // Re-run analysis automatically
+    passwordInput.dispatchEvent(new Event('input'));
 });
