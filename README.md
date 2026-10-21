@@ -109,4 +109,4 @@ password-strength-analyzer/
 ├── index.html
 ├── style.css
 ├── script.js
-└── README.md
+└── README.MD
