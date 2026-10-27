@@ -112,4 +112,5 @@ password-strength-analyzer/
 └── README.MD
 
 
+[ the testing of the password's  logic is the HTML file but it is modifeid in future ]
 .
